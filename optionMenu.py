@@ -7,16 +7,16 @@ def employee():
     choice=int(input("Option:"))
     if choice == 1:
         print("Add Employee")
-        from addEmployee import addEmployee
+        from employeeTable import addEmployee
     if choice == 2:
         print("Update Employee")
-        from updateEmployee import updateEmployee
+        from employeeTable import updateEmployee
     if choice == 3:
         print("Delete Employee")
-        from deleteEmployee import deleteEmployee
+        from employeeTable import deleteEmployee
     if choice == 4:
         print("Print Employee")
-        from printEmployee import printEmployee
+        from employeeTable import printEmployee
 
 
 def storeMode():
