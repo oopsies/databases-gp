@@ -22,6 +22,6 @@ def addEmployee():
     myresult = mycursor.fetchall()
     for x in myresult:
         print(x)
-    print(mycursor.rowcount,"record inserted.")
+    print(mycursor.rowcount,"record inserted.\n")
 
 addEmployee()
