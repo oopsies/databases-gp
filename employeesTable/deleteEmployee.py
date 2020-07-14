@@ -15,8 +15,11 @@ def deleteEmployee():
     val = "\'"+input(attr+"=")+"\'"
     record=attr+"="+val
     record=sql+record
-    print(record)
+    mycursor.execute("SELECT *FROM Employees WHERE "+attr+"="+val)
+    myresult = mycursor.fetchall()
     mycursor.execute(record)
     mydb.commit()
+    for x in myresult:
+        print(x)
     print(mycursor.rowcount,"record(s) deleted\n")
 deleteEmployee()
