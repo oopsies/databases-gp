@@ -19,5 +19,9 @@ def updateEmployee():
     print(sql)
     mycursor.execute(sql)
     mydb.commit()
+    mycursor.execute("SELECT *FROM Employees WHERE "+ newAttr+"="+ newVal)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
     print(mycursor.rowcount,"record(s) affected\n")
 updateEmployee()
