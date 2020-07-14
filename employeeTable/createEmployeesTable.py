@@ -9,4 +9,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("CREATE TABLE employees (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), store_preference VARCHAR(255))")
+def createEmployeesTable():
+    sql = "CREATE TABLE Employees (id VARCHAR(5) NOT NULL PRIMARY KEY, name VARCHAR(255) NOT NULL, store_preference VARCHAR(255) NOT NULL, pin VARCHAR(5) NOT NULL )"
+    mycursor.execute(sql)
+createEmployeesTable()
