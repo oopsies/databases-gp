@@ -11,7 +11,7 @@ mycursor = mydb.cursor()
 
 def updateEmployee():
     sql = "UPDATE employees SET "
-    newAttr = input("What value would you like to change(id,name,store_preference)?")
+    newAttr = input("What value would you like to change(id,name,store_preference,pin)?")
     newVal = "\'"+input("What value do you want?\n"+newAttr+"=")+"\'"
     targetAttr = input("Which attributes are you searching for(id,name,store_preference)?")
     targetVal = "\'"+input("What value does it have?\n"+targetAttr+"=")+"\'"

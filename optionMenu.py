@@ -1,8 +1,8 @@
 
 def employee():
-    print("1. Add")
-    print("2. Update")
-    print("3. Delete")
+    print("1. Add Employee(s)")
+    print("2. Update Employee(s)")
+    print("3. Delete Employee(s)")
     print("4. Print Employee(s)")
     choice=int(input("Option:"))
     if choice == 1:
