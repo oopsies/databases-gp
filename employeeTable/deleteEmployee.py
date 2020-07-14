@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def deleteEmployee():
-    sql = "DELETE FROM employees WHERE "
+    sql = "DELETE FROM Employees WHERE "
     attr = input("Delete using desired attribute(ex. name, id, store_preference):")
     val = "\'"+input(attr+"=")+"\'"
     record=attr+"="+val
@@ -18,5 +18,5 @@ def deleteEmployee():
     print(record)
     mycursor.execute(record)
     mydb.commit()
-    print(mycursor.rowcount,"record(s) deleted")
+    print(mycursor.rowcount,"record(s) deleted\n")
 deleteEmployee()

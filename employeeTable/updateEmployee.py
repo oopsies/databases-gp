@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def updateEmployee():
-    sql = "UPDATE employees SET "
+    sql = "UPDATE Employees SET "
     newAttr = input("What value would you like to change(id,name,store_preference,pin)?")
     newVal = "\'"+input("What value do you want?\n"+newAttr+"=")+"\'"
     targetAttr = input("Which attributes are you searching for(id,name,store_preference)?")
@@ -19,5 +19,5 @@ def updateEmployee():
     print(sql)
     mycursor.execute(sql)
     mydb.commit()
-    print(mycursor.rowcount,"record(s) affected")
+    print(mycursor.rowcount,"record(s) affected\n")
 updateEmployee()
