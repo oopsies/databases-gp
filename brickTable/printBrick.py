@@ -9,16 +9,16 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-def printEmployee():
-    print("1. All Employees")
-    print("2. Specific Employee(s)")
+def printBrick():
+    print("1. All Bricks")
+    print("2. Specific Brick(s)")
     choice=int(input("Option:"))
 
     if choice == 1:
-        sql = "SELECT * FROM employees"
+        sql = "SELECT * FROM Bricks"
     elif choice == 2:
-        sql = "SELECT * FROM employees WHERE "
-        attr = input("What is the attribute you are searching for (ex. id, name, store_preference)?")
+        sql = "SELECT * FROM Bricks WHERE "
+        attr = input("What is the attribute you are searching for (ex. id, name, quantity, price)?")
         val = "\'"+input(attr+"=")+"\'"
         record = attr+"="+val
         sql=sql+record
@@ -28,5 +28,5 @@ def printEmployee():
     myresult = mycursor.fetchall()
     for x in myresult:
         print(x)
-        
-printEmployee()
+
+printBrick()
