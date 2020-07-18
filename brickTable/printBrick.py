@@ -24,6 +24,7 @@ def printBrick():
         sql=sql+record
     else:
         print("Invalid Choice")
+        printBrick()
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
