@@ -16,7 +16,6 @@ def updateBrick():
     targetAttr = input("What attributes are you searching for(id,name,quantity,price)?")
     targetVal = "\'"+ input("What value does it have?\n"+targetAttr+"=")+"\'"
     sql = sql + newAttr +"="+newVal+" WHERE "+targetAttr+"="+targetVal
-    print(sql)
     mycursor.execute(sql)
     mydb.commit()
     mycursor.execute("SELECT *FROM Bricks WHERE "+ newAttr+"="+ newVal)

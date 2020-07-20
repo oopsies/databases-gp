@@ -24,6 +24,7 @@ def printEmployee():
         sql=sql+record
     else:
         print("Invalid Choice")
+        printEmployee()
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     for x in myresult:
