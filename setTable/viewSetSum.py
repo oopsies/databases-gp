@@ -28,4 +28,3 @@ def viewSetSum():
             for x in myresult:
                 print(set_id+" has a price of $"+str(x[0]))
 
-viewSetSum()

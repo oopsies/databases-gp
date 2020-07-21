@@ -30,4 +30,3 @@ def printBrick():
     for x in myresult:
         print(x)
 
-printBrick()

@@ -23,4 +23,3 @@ def addBrick():
     for x in myresult:
         print(x)
     print(mycursor.rowcount,"record inserted.\n")
-addBrick()

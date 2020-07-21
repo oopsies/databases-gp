@@ -51,4 +51,3 @@ def printSet():
     else:
         print("Invalid Option")
         printSet()
-printSet()
