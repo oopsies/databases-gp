@@ -23,4 +23,3 @@ def updateBrick():
     for x in myresult:
         print(x)
     print(mycursor.rowcount,"record(s) affected\n")
-updateBrick()

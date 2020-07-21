@@ -9,7 +9,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-def updateEmployee():
+def updateCustomers():
     customers_data = "UPDATE Customers SET "
     newAttr = input("What value would you like to change(name, email, address, phone)?")
     newVal = "\'"+input("What value do you want?\n"+newAttr+"=")+"\'"

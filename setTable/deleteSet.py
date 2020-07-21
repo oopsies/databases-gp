@@ -60,4 +60,3 @@ def deleteSet():
     else:
         print("Invalid Choice")
         deleteSet()
-deleteSet()

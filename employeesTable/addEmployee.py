@@ -23,5 +23,3 @@ def addEmployee():
     for x in myresult:
         print(x)
     print(mycursor.rowcount,"record inserted.\n")
-
-addEmployee()
