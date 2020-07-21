@@ -44,13 +44,13 @@ def employee():
         if choice == 1:
             print("Add Employee")
             from employeesTable import addEmployee
-        if choice == 2:
+        elif choice == 2:
             print("Update Employee")
             from employeesTable import updateEmployee
-        if choice == 3:
+        elif choice == 3:
             print("Delete Employee")
             from employeesTable import deleteEmployee
-        if choice == 4:
+        elif choice == 4:
             print("Print Employee")
             from employeesTable import printEmployee
 
@@ -68,14 +68,38 @@ def storeMode():
         if choice == 1:
             print ("Employee Management\n")
             employee()
-        if choice == 2:
+        elif choice == 2:
             print ("Order Management\n")
-        if choice == 3:
+        elif choice == 3:
             print ("Reports\n")
-        if choice == 4:
+        elif choice == 4:
             print ("Search Item\n")
-        if choice == 5:
+        elif choice == 5:
             print ("Payment\n")
+
+def onlineMode():
+    choice=0
+    while choice!=6:
+        print("1. Add to Cart")
+        print("2. Browse Sets/Bricks")
+        print("3. View Cart")
+        print("4. View History")
+        print("5. Pay for Cart")
+        print("6. Back")
+        choice = int(input("Option:"))
+
+        if choice == 1:
+            print("Add to Cart\n")
+        elif choice == 2:
+            print("Browse Sets/Bricks\n")
+        elif choice == 3:
+            print("View Cart\n")
+        elif choice == 4:
+            print("View History\n")
+        elif choice == 5:
+            print("Pay for cart\n")
+
+
 
 def menu():
     choice=0
@@ -89,6 +113,7 @@ def menu():
             res=storeLogin()
             if res == 1:
                 storeMode()
-        if choice == 2:
+        elif choice == 2:
             print("Online mode selected\n")
+            onlineMode()
 menu()
