@@ -76,4 +76,3 @@ def updateSet():
                         mycursor.execute(sql)
                         mydb.commit()
                         print(mycursor.rowcount,"record(s) affected\n")
-updateSet()

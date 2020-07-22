@@ -22,4 +22,3 @@ def deleteBrick():
     for x in myresult:
         print(x)
     print(mycursor.rowcount,"record(s) deleted\n")
-deleteBrick()

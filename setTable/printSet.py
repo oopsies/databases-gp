@@ -32,6 +32,11 @@ def printSet():
             else:
                 for x in myresult:
                       print(x)
+                mycursor.execute("SELECT SUM(bricks_needed*price) FROM Set_t RIGHT JOIN Bricks ON Set_t.brick_id=Bricks.id WHERE set_id="+set_id)
+                myresult=mycursor.fetchall()
+                for x in myresult:
+                    print(set_id+" has a price of $"+str(x[0]))
+            
     elif choice == 3:
         sql="SELECT * FROM Set_t WHERE "
         attr = input("What is the attribute you are searching for(ex. set_id, name, brick_id, bricks_needed )?")
@@ -46,4 +51,3 @@ def printSet():
     else:
         print("Invalid Option")
         printSet()
-printSet()

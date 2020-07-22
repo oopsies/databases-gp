@@ -24,4 +24,3 @@ def updateEmployee():
     for x in myresult:
         print(x)
     print(mycursor.rowcount,"record(s) affected\n")
-updateEmployee()

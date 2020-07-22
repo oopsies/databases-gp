@@ -43,17 +43,68 @@ def employee():
         choice=int(input("Option:"))
         if choice == 1:
             print("Add Employee")
-            from employeesTable import addEmployee
-        if choice == 2:
+            from employeesTable.addEmployee import addEmployee
+            addEmployee()
+        elif choice == 2:
             print("Update Employee")
-            from employeesTable import updateEmployee
-        if choice == 3:
+            from employeesTable.updateEmployee import updateEmployee
+            updateEmployee()
+        elif choice == 3:
             print("Delete Employee")
-            from employeesTable import deleteEmployee
-        if choice == 4:
+            from employeesTable.deleteEmployee import deleteEmployee
+            deleteEmployee()
+        elif choice == 4:
             print("Print Employee")
-            from employeesTable import printEmployee
+            from employeesTable.printEmployee import printEmployee
+            printEmployee()
 
+def item():
+    choice=0
+    while choice!=9:
+        print("1. Add Brick")
+        print("2. Delete Brick(s)")
+        print("3. Update Brick(s)")
+        print("4. Print Brick(s)")
+        print("5. Add Set")
+        print("6. Delete Set(s)")
+        print("7. Update Set(s)")
+        print("8. Print Set(s)")
+        print("9. Back")
+        choice=int(input("Option:"))
+        if choice == 1:
+            print("Add Brick")
+            from brickTable.addBrick import addBrick
+            addBrick()
+        elif choice == 2:
+            print("Delete Brick(s)")
+            from brickTable.deleteBrick import deleteBrick
+            deleteBrick()
+        elif choice == 3:
+            print("Update Brick(s)")
+            from brickTable.updateBrick import updateBrick
+            updateBrick()
+        elif choice == 4:
+            print("Print Brick(s)")
+            from brickTable.printBrick import printBrick
+            printBrick()
+        elif choice == 5:
+            print("Add Set")
+            from setTable.addSet import addSet
+            addSet()
+        elif choice == 6:
+            print("Delete Brick(s)")
+            from setTable.deleteSet import deleteSet
+            deleteSet()
+        elif choice == 7:
+            print("Update Set(s)")
+            from setTable.updateSetTable import updateSet
+            updateSet()
+        elif choice == 8:
+            print("Print Set(s)")
+            from setTable.printSet import printSet
+            printSet()
+        elif choice != 9:
+            print("Invalid Choice")
 
 def storeMode():
     choice=0
@@ -61,21 +112,53 @@ def storeMode():
         print("1. Employee Management")
         print("2. Order Management")
         print("3. Reports")
-        print("4. Search Item")
+        print("4. Item Management")
         print ("5. Payment")
         print("6. Back")
         choice=int(input("Option:"))
         if choice == 1:
             print ("Employee Management\n")
             employee()
-        if choice == 2:
+        elif choice == 2:
             print ("Order Management\n")
-        if choice == 3:
+        elif choice == 3:
             print ("Reports\n")
-        if choice == 4:
-            print ("Search Item\n")
-        if choice == 5:
+        elif choice == 4:
+            print ("Item Management\n")
+            item()
+        elif choice == 5:
             print ("Payment\n")
+
+def onlineMode():
+    choice=0
+    while choice!=7:
+        print("1. Add to Cart")
+        print("2. Browse Sets")
+        print("3. View Cart")
+        print("4. View History")
+        print("5. Pay for Cart")
+        print("6. Browse Bricks")
+        print("7. Back")
+        choice = int(input("Option:"))
+
+        if choice == 1:
+            print("Add to Cart\n")
+        elif choice == 2:
+            print("Browse Sets\n")
+            from setTable.printSet import printSet
+            printSet()
+        elif choice == 3:
+            print("View Cart\n")
+        elif choice == 4:
+            print("View History\n")
+        elif choice == 5:
+            print("Pay for cart\n")
+        elif choice == 6:
+            print("Browse Bricks\n")
+            from brickTable.printBrick import printBrick
+            printBrick()
+
+
 
 def menu():
     choice=0
@@ -89,6 +172,7 @@ def menu():
             res=storeLogin()
             if res == 1:
                 storeMode()
-        if choice == 2:
+        elif choice == 2:
             print("Online mode selected\n")
+            onlineMode()
 menu()
