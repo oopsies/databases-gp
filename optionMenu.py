@@ -8,6 +8,7 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+username="none"
 
 def storeLogin():
     attempts=0
@@ -30,6 +31,7 @@ def storeLogin():
             break
     if attempts==4:
         print("Too many incorrect guesses")
+    username=user
     return accessStatus
 
 def employee():
@@ -57,6 +59,32 @@ def employee():
             print("Print Employee")
             from employeesTable.printEmployee import printEmployee
             printEmployee()
+
+def cart():
+    choice=0
+    while choice!=5:
+        print("1. Add to Cart")
+        print("2. Update Cart")
+        print("3. Delete Cart")
+        print("4. View Cart")
+        print("5. Back")
+        choice=int(input("Option:"))
+        if choice == 1:
+            print("Add to Cart")
+            from cartTable.addCart import addCart
+            addCart()
+        elif choice == 2:
+            print("Update Cart")
+            from cartTable.updateCart import updateCart
+            updateCart()
+        elif choice == 3:
+            print("Delete Cart")
+            from cartTable.deleteCart import deleteCart
+            deleteCart()
+        elif choice == 4:
+            print("View Cart")
+            from cartTable.printCart import printCart
+            printCart()
 
 def item():
     choice=0
@@ -108,13 +136,14 @@ def item():
 
 def storeMode():
     choice=0
-    while choice!=6:
+    while choice!=7:
         print("1. Employee Management")
         print("2. Order Management")
         print("3. Reports")
         print("4. Item Management")
-        print ("5. Payment")
-        print("6. Back")
+        print("5. Payment")
+        print("6. Sale")
+        print("7. Back")
         choice=int(input("Option:"))
         if choice == 1:
             print ("Employee Management\n")
@@ -128,6 +157,9 @@ def storeMode():
             item()
         elif choice == 5:
             print ("Payment\n")
+        elif choice == 6:
+            print("Sale\n")
+            cart()
 
 def onlineMode():
     choice=0
