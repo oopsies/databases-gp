@@ -163,24 +163,36 @@ def report():
                     print(x)
 
     def saleReport():
-        period = 0
-        while period != 3:
-            print("What time period would you like to view?")
-            print("1. Monthly sales")
-            print("2. Weekly sales")
-            print("3. Daily sales")
-            print("4. Back")
-            period = int(input("Option:"))
-            if period == 1:
-                store = input("Choose store: ")
-                print(store)
-                mycursor.execute("SELECT * FROM Employees WHERE store_preference = '%s'" % (store))
-                print("('ID', 'Name', 'Store', 'Pin')")
+        sale = 0
+        while sale != 5:
+            print("Which sales would you like to view?")
+            print("1. View all sales")
+            print("2. View total number of sales")
+            print("3. View number of sales from specific item")
+            print("4. View sales from specific user")
+            print("5. Back")
+            sale = int(input("Option:"))
+            if sale == 1:
+                mycursor.execute("SELECT * FROM Cart")
+                print("('ItemID', 'CartID', 'User', 'Quantity', 'Price', 'Category')")
                 for x in mycursor.fetchall():
                     print(x)
-            elif period == 2:
-                mycursor.execute("SELECT * FROM Employees")
-                print("('ID', 'Name', 'Store', 'Pin')")
+            elif sale == 2:
+                mycursor.execute("SELECT COUNT(itemID) FROM Cart")
+                print("Total number of sales: ", end=" ")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif sale == 3:
+                item = int(input("Item ID:"))
+                mycursor.execute("SELECT COUNT(itemID) FROM Cart WHERE itemID = %d" % (item))
+                print("Total number of sales from item %d: " % item, end=" ")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif sale == 4:
+                user = input("User: ")
+                mycursor.execute("SELECT * FROM Cart WHERE user = '%s'" % (user))
+                print("All sales from user '%s': " % user)
+                print("('ItemID', 'CartID', 'User', 'Quantity', 'Price', 'Category')")
                 for x in mycursor.fetchall():
                     print(x)
 
@@ -194,7 +206,6 @@ def report():
             type = int(input("Option:"))
             if type == 1:
                 store = input("Choose store: ")
-                print(store)
                 mycursor.execute("SELECT * FROM Employees WHERE store_preference = '%s'" % (store))
                 print("('ID', 'Name', 'Store', 'Pin')")
                 for x in mycursor.fetchall():
@@ -204,9 +215,6 @@ def report():
                 print("('ID', 'Name', 'Store', 'Pin')")
                 for x in mycursor.fetchall():
                     print(x)
-
-    def poopy():
-        return 5
 
     choice = 0
     while choice != 4:
@@ -219,14 +227,9 @@ def report():
         if choice == 1:
             invReport()
         elif choice == 2:
-            x = 5
+            saleReport()
         elif choice == 3:
             employeeReport()
-
-
-
-
-
 
 def storeMode():
     choice=0
