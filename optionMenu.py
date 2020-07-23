@@ -106,6 +106,100 @@ def item():
         elif choice != 9:
             print("Invalid Choice")
 
+def report():
+    def invReport():
+        type = 0
+        while type != 4:
+            print("What inventory would you like to see?")
+            print("1. Inventory under a certain quantity")
+            print("2. Inventory over a certain quantity")
+            print("3. All inventory")
+            print("4. Back")
+            type = int(input("Option:"))
+            if type == 1:
+                thresh = int(input("Choose quantity threshold: "))
+                mycursor.execute("SELECT * FROM Bricks WHERE quantity < %d" % (thresh))
+                print("('BrickID', 'BrickName', 'Quantity', 'Price')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif type == 2:
+                thresh = int(input("Choose quantity threshold: "))
+                mycursor.execute("SELECT * FROM Bricks WHERE quantity > %d" % (thresh))
+                print("('BrickID', 'BrickName', 'Quantity', 'Price')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif type == 3:
+                mycursor.execute("SELECT * FROM Bricks")
+                print("('BrickID', 'BrickName', 'Quantity', 'Price')")
+                for x in mycursor.fetchall():
+                    print(x)
+
+    def saleReport():
+        period = 0
+        while period != 3:
+            print("What time period would you like to view?")
+            print("1. Monthly sales")
+            print("2. Weekly sales")
+            print("3. Daily sales")
+            print("4. Back")
+            period = int(input("Option:"))
+            if period == 1:
+                store = input("Choose store: ")
+                print(store)
+                mycursor.execute("SELECT * FROM Employees WHERE store_preference = '%s'" % (store))
+                print("('ID', 'Name', 'Store', 'Pin')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif period == 2:
+                mycursor.execute("SELECT * FROM Employees")
+                print("('ID', 'Name', 'Store', 'Pin')")
+                for x in mycursor.fetchall():
+                    print(x)
+
+    def employeeReport():
+        type = 0
+        while type != 3:
+            print("What employees would you like to see?")
+            print("1. Employees from a certain store")
+            print("2. All employees")
+            print("3. Back")
+            type = int(input("Option:"))
+            if type == 1:
+                store = input("Choose store: ")
+                print(store)
+                mycursor.execute("SELECT * FROM Employees WHERE store_preference = '%s'" % (store))
+                print("('ID', 'Name', 'Store', 'Pin')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif type == 2:
+                mycursor.execute("SELECT * FROM Employees")
+                print("('ID', 'Name', 'Store', 'Pin')")
+                for x in mycursor.fetchall():
+                    print(x)
+
+    def poopy():
+        return 5
+
+    choice = 0
+    while choice != 4:
+        print("Choose report type:")
+        print("1. Inventory Report")
+        print("2. Sales Report")
+        print("3. Employee Report")
+        print("4. Back")
+        choice = int(input("Option:"))
+        if choice == 1:
+            invReport()
+        elif choice == 2:
+            x = 5
+        elif choice == 3:
+            employeeReport()
+
+
+
+
+
+
 def storeMode():
     choice=0
     while choice!=6:
@@ -113,7 +207,7 @@ def storeMode():
         print("2. Order Management")
         print("3. Reports")
         print("4. Item Management")
-        print ("5. Payment")
+        print("5. Payment")
         print("6. Back")
         choice=int(input("Option:"))
         if choice == 1:
@@ -123,6 +217,7 @@ def storeMode():
             print ("Order Management\n")
         elif choice == 3:
             print ("Reports\n")
+            report()
         elif choice == 4:
             print ("Item Management\n")
             item()
