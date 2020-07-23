@@ -12,4 +12,8 @@ mycursor = mydb.cursor() #AWAYS ON
 def createCustomersTable():
     customers_data = "CREATE TABLE Customers (name VARCHAR(100) NOT NULL, email VARCHAR (100) NOT NULL PRIMARY KEY, address VARCHAR(150) NOT NULL, phone INT (20))"
     mycursor.execute(customers_data)
-#createCustomersTable() #Error if ON
+
+createCustomersTable() #Error if ON
+mycursor.execute("DESCRIBE Customers")
+for x in mycursor:
+    print(x)
