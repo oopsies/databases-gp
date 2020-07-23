@@ -132,6 +132,103 @@ def item():
         elif choice != 9:
             print("Invalid Choice")
 
+def report():
+    def invReport():
+        type = 0
+        while type != 4:
+            print("What inventory would you like to see?")
+            print("1. Inventory under a certain quantity")
+            print("2. Inventory over a certain quantity")
+            print("3. All inventory")
+            print("4. Back")
+            type = int(input("Option:"))
+            if type == 1:
+                thresh = int(input("Choose quantity threshold: "))
+                mycursor.execute("SELECT * FROM Bricks WHERE quantity < %d" % (thresh))
+                print("('BrickID', 'BrickName', 'Quantity', 'Price')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif type == 2:
+                thresh = int(input("Choose quantity threshold: "))
+                mycursor.execute("SELECT * FROM Bricks WHERE quantity > %d" % (thresh))
+                print("('BrickID', 'BrickName', 'Quantity', 'Price')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif type == 3:
+                mycursor.execute("SELECT * FROM Bricks")
+                print("('BrickID', 'BrickName', 'Quantity', 'Price')")
+                for x in mycursor.fetchall():
+                    print(x)
+
+    def saleReport():
+        sale = 0
+        while sale != 5:
+            print("Which sales would you like to view?")
+            print("1. View all sales")
+            print("2. View total number of sales")
+            print("3. View number of sales from specific item")
+            print("4. View sales from specific user")
+            print("5. Back")
+            sale = int(input("Option:"))
+            if sale == 1:
+                mycursor.execute("SELECT * FROM Cart")
+                print("('ItemID', 'CartID', 'User', 'Quantity', 'Price', 'Category')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif sale == 2:
+                mycursor.execute("SELECT COUNT(itemID) FROM Cart")
+                print("Total number of sales: ", end=" ")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif sale == 3:
+                item = int(input("Item ID:"))
+                mycursor.execute("SELECT COUNT(itemID) FROM Cart WHERE itemID = %d" % (item))
+                print("Total number of sales from item %d: " % item, end=" ")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif sale == 4:
+                user = input("User: ")
+                mycursor.execute("SELECT * FROM Cart WHERE user = '%s'" % (user))
+                print("All sales from user '%s': " % user)
+                print("('ItemID', 'CartID', 'User', 'Quantity', 'Price', 'Category')")
+                for x in mycursor.fetchall():
+                    print(x)
+
+    def employeeReport():
+        type = 0
+        while type != 3:
+            print("What employees would you like to see?")
+            print("1. Employees from a certain store")
+            print("2. All employees")
+            print("3. Back")
+            type = int(input("Option:"))
+            if type == 1:
+                store = input("Choose store: ")
+                mycursor.execute("SELECT * FROM Employees WHERE store_preference = '%s'" % (store))
+                print("('ID', 'Name', 'Store', 'Pin')")
+                for x in mycursor.fetchall():
+                    print(x)
+            elif type == 2:
+                mycursor.execute("SELECT * FROM Employees")
+                print("('ID', 'Name', 'Store', 'Pin')")
+                for x in mycursor.fetchall():
+                    print(x)
+
+    choice = 0
+    while choice != 4:
+        print("Choose report type:")
+        print("1. Inventory Report")
+        print("2. Sales Report")
+        print("3. Employee Report")
+        print("4. Back")
+        choice = int(input("Option:"))
+        if choice == 1:
+            invReport()
+        elif choice == 2:
+            saleReport()
+        elif choice == 3:
+            employeeReport()
+
 def storeMode():
     choice=0
     while choice!=6:
@@ -166,6 +263,7 @@ def storeModeManager():
         print("5. Payment")
         print("6. Sale")
         print("7. Back")
+
         choice=int(input("Option:"))
         if choice == 1:
             print ("Employee Management\n")
@@ -175,6 +273,7 @@ def storeModeManager():
             cart()
         elif choice == 3:
             print ("Reports\n")
+            report()
         elif choice == 4:
             print ("Item Management\n")
             item()
