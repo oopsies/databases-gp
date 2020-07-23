@@ -10,13 +10,10 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def createSaleTable():
-    sql = "CREATE TABLE Sale (itemID VARCHAR(5) NOT NULL,"\
-        "store VARCHAR(255) NOT NULL,"\
-        "quantity INT UNSIGNED NOT NULL,"\
+    sql = "CREATE TABLE Sale (cartID VARCHAR(5) NOT NULL,"\
         "saleDate date NOT NULL,"\
-        "itemCategory INT,"\
         "price DECIMAL (9,2) UNSIGNED,"\
-        "PRIMARY KEY(itemID,itemCategory,saleDate))"
+        "PRIMARY KEY(cartID,saleDate))"
     mycursor.execute(sql)
     mycursor.execute("DESCRIBE Sale")
     for x in mycursor:
