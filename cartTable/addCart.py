@@ -41,7 +41,18 @@ def addCart():
 
                 mycursor.execute("SELECT SUM(itemQuantity*itemPrice) FROM Cart WHERE cartID="+str("%05d"%cartID))
                 myresult = mycursor.fetchall()
-                mycursor.execute("SELECT ")
+                for x in myresult:
+                    price=x[0]
+
+                sql="INSERT INTO Balance(cartID,price) VALUES (%s,%s)"
+                val=(str("%05d"%cartID),str(price))
+                mycursor.execute(sql,val)
+                mydb.commit()
+                mycursor.execute("SELECT *FROM Balance")
+                myresult = mycursor.fetchall()
+                for x in myresult:
+                    print(x)
+
 
         elif item in ['brick','Brick']:
             print("Brick")
@@ -62,7 +73,22 @@ def addCart():
                 myresult = mycursor.fetchall()
                 for x in myresult:
                    print(x)
-                print(mycursor.rowcount,"record inserted.\n")      
+                print(mycursor.rowcount,"record inserted.\n")
+
+                mycursor.execute("SELECT SUM(itemQuantity*itemPrice) FROM Cart WHERE cartID="+str("%05d"%cartID))
+                myresult = mycursor.fetchall()
+                for x in myresult:
+                    price=x[0]
+
+                sql="INSERT INTO Balance(cartID,price) VALUES (%s,%s)"
+                val=(str("%05d"%cartID),str(price))
+                mycursor.execute(sql,val)
+                mydb.commit()
+                mycursor.execute("SELECT *FROM Balance")
+                myresult = mycursor.fetchall()
+                for x in myresult:
+                    print(x)
+    
     elif choice == 2:
         sql = "INSERT INTO Cart(itemID, cartID, user, itemQuantity, itemPrice, itemCategory) VALUES (%s,%s,%s,%s,%s,%s) "
         mycursor.execute("SELECT DISTINCT cartID FROM Cart")
@@ -98,7 +124,23 @@ def addCart():
                     myresult = mycursor.fetchall()
                     for x in myresult:
                         print(x)
-                    print(mycursor.rowcount,"record inserted.\n")       
+                    print(mycursor.rowcount,"record inserted.\n")
+
+                    mycursor.execute("SELECT SUM(itemQuantity*itemPrice) FROM Cart WHERE cartID="+cartID)
+                    myresult = mycursor.fetchall()
+                    for x in myresult:
+                        price=x[0]
+
+                    sql="UPDATE Balance SET price="+str(price)+" WHERE cartID="+cartID
+                    mycursor.execute(sql)
+                    mydb.commit()
+
+                    mycursor.execute("SELECT *FROM Balance WHERE cartID="+cartID)
+                    myresult = mycursor.fetchall()
+                    for x in myresult:
+                        print(x)
+                    print(mycursor.rowcount,"record(s) affected\n")
+
             elif item in ['brick','Brick']:
                 print("Brick")
                 brick_id=input("BrickID:")
@@ -118,4 +160,19 @@ def addCart():
                     myresult = mycursor.fetchall()
                     for x in myresult:
                       print(x)
-                    print(mycursor.rowcount,"record inserted.\n")     
+                    print(mycursor.rowcount,"record inserted.\n")  
+
+                    mycursor.execute("SELECT SUM(itemQuantity*itemPrice) FROM Cart WHERE cartID="+cartID)
+                    myresult = mycursor.fetchall()
+                    for x in myresult:
+                        price=x[0]
+
+                    sql="UPDATE Balance SET price="+str(price)+" WHERE cartID="+cartID
+                    mycursor.execute(sql)
+                    mydb.commit()
+
+                    mycursor.execute("SELECT *FROM Balance WHERE cartID="+cartID)
+                    myresult = mycursor.fetchall()
+                    for x in myresult:
+                        print(x)
+                    print(mycursor.rowcount,"record(s) affected\n")

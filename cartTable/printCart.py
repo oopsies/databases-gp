@@ -33,4 +33,8 @@ def printCart():
         else:
             for x in myresult:
                 print(x)
+            mycursor.execute("SELECT *FROM Balance WHERE cartID="+cartID)
+            myresult = mycursor.fetchall()
+            for x in myresult:
+                print(x)
         
