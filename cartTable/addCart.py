@@ -37,7 +37,12 @@ def addCart():
                 myresult = mycursor.fetchall()
                 for x in myresult:
                    print(x)
-                print(mycursor.rowcount,"record inserted.\n")       
+                print(mycursor.rowcount,"record inserted.\n")
+
+                mycursor.execute("SELECT SUM(itemQuantity*itemPrice) FROM Cart WHERE cartID="+str("%05d"%cartID))
+                myresult = mycursor.fetchall()
+                mycursor.execute("SELECT ")
+
         elif item in ['brick','Brick']:
             print("Brick")
             brick_id=input("BrickID:")

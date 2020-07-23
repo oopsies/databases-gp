@@ -9,14 +9,13 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 username="none"
-
 def storeLogin():
     attempts=0
     accessStatus=0
     for x in range(4):
         user="\'"+input("username:")+"\'"
         password="\'"+input("password:")+"\'"
-        sql="SELECT * FROM Employees WHERE id="+user+" AND pin="+password
+        sql="SELECT manage FROM Employees WHERE id="+user+" AND pin="+password
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
         y=len(myresult)
@@ -26,8 +25,7 @@ def storeLogin():
         else:
             print("Access Granted")
             for i in myresult:
-                print(i)
-            accessStatus=1
+                accessStatus=i[0]
             break
     if attempts==4:
         print("Too many incorrect guesses")
@@ -233,6 +231,30 @@ def report():
 
 def storeMode():
     choice=0
+    while choice!=6:
+        print("1. Order Management")
+        print("2. Reports")
+        print("3. Item Management")
+        print("4. Payment")
+        print("5. Sale")
+        print("6. Back")
+        choice=int(input("Option:"))
+        if choice == 1:
+            print ("Order Management\n")
+            cart()
+        elif choice == 2:
+            print ("Reports\n")
+        elif choice == 3:
+            print ("Item Management\n")
+            item()
+        elif choice == 4:
+            print ("Payment\n")
+        elif choice == 5:
+            print("Sale\n")
+            cart()
+
+def storeModeManager():
+    choice=0
     while choice!=7:
         print("1. Employee Management")
         print("2. Order Management")
@@ -248,6 +270,7 @@ def storeMode():
             employee()
         elif choice == 2:
             print ("Order Management\n")
+            cart()
         elif choice == 3:
             print ("Reports\n")
             report()
@@ -256,10 +279,6 @@ def storeMode():
             item()
         elif choice == 5:
             print ("Payment\n")
-        elif choice == 6:
-            print("Sale\n")
-            cart()
-
 def onlineMode():
     choice=0
     while choice!=7:
@@ -302,8 +321,11 @@ def menu():
             print("Store mode selected\n")
             res=storeLogin()
             if res == 1:
+                storeModeManager()
+            elif res == 0:
                 storeMode()
         elif choice == 2:
             print("Online mode selected\n")
             onlineMode()
 menu()
+quit()
