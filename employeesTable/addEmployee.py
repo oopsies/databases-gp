@@ -14,8 +14,9 @@ def addEmployee():
     pin = random.randint(0000,9999)
     name=input("name:")
     store_preference=input("store_preference:")
-    sql="INSERT INTO Employees (id,name,store_preference,pin) VALUES (%s,%s,%s,%s)"
-    val=(str("%05d"%id),name,store_preference,str("%04d"%pin))
+    manage=input("manager(1 or 0):")
+    sql="INSERT INTO Employees (id,name,store_preference,pin,manage) VALUES (%s,%s,%s,%s,%s)"
+    val=(str("%05d"%id),name,store_preference,str("%04d"%pin),str(manage))
     mycursor.execute(sql,val)
     mydb.commit()
     mycursor.execute("SELECT *FROM Employees WHERE id="+str("%05d"%id))

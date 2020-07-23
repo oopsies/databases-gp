@@ -10,5 +10,6 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def createEmployeesTable():
-    sql = "CREATE TABLE Employees (id VARCHAR(5) NOT NULL PRIMARY KEY, name VARCHAR(255) NOT NULL, store_preference VARCHAR(255) NOT NULL, pin VARCHAR(5) NOT NULL )"
+    sql = "CREATE TABLE Employees (id VARCHAR(5) NOT NULL PRIMARY KEY, name VARCHAR(255) NOT NULL, store_preference VARCHAR(255) NOT NULL, pin VARCHAR(5) NOT NULL, manage INT NOT NULL )"
     mycursor.execute(sql)
+createEmployeesTable()
