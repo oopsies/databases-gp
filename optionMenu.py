@@ -32,6 +32,37 @@ def storeLogin():
     username=user
     return accessStatus
 
+def onlineLogin():
+    attempts = 0
+    accessStatus = 0
+    print("1. Login")
+    print("2. SignUp")
+    print("3. Guest")
+    choice=int(input("Option:"))
+    if choice == 1:
+        for x in range(4):
+            user="\'"+input("username/email:")+"\'"
+            password="\'"+input("password:")+"\'"
+            sql="SELECT *FROM Customers WHERE email="+user+" AND password="+password
+            mycursor.execute(sql)
+            myresult = mycursor.fetchall()
+            y=len(myresult)
+            if y == 0:
+                print("Incorrect Password/Username Try Again")
+                attempts+=1
+            else:
+                print("Access Granted")
+                for i in myresult:
+                    accessStatus=i[0]
+                break
+        if attempts==4:
+            print("Too many incorrect guesses")
+        username=user
+        return accessStatus
+    elif choice == 2:
+        from Customers_Table.addCustomers import addCustomers
+        addCustomers()
+
 def employee():
     choice=0
     while choice!=5:
@@ -60,12 +91,13 @@ def employee():
 
 def cart():
     choice=0
-    while choice!=5:
+    while choice!=6:
         print("1. Add to Cart")
         print("2. Update Cart")
         print("3. Delete Cart")
         print("4. View Cart")
-        print("5. Back")
+        print("5. Make Payment")
+        print("6. Back")
         choice=int(input("Option:"))
         if choice == 1:
             print("Add to Cart")
@@ -83,6 +115,10 @@ def cart():
             print("View Cart")
             from cartTable.printCart import printCart
             printCart()
+        elif choice == 5:
+            print("Make Payment")
+            from cartTable.payCart import payCart
+            payCart()
 
 def item():
     choice=0
@@ -231,38 +267,32 @@ def report():
 
 def storeMode():
     choice=0
-    while choice!=6:
+    while choice!=4:
         print("1. Order Management")
         print("2. Reports")
         print("3. Item Management")
-        print("4. Payment")
-        print("5. Sale")
-        print("6. Back")
+        print("4. Back")
         choice=int(input("Option:"))
         if choice == 1:
             print ("Order Management\n")
             cart()
         elif choice == 2:
             print ("Reports\n")
+            report()
         elif choice == 3:
             print ("Item Management\n")
             item()
         elif choice == 4:
-            print ("Payment\n")
-        elif choice == 5:
-            print("Sale\n")
-            cart()
+            print ("Back\n")
 
 def storeModeManager():
     choice=0
-    while choice!=7:
+    while choice!=5:
         print("1. Employee Management")
         print("2. Order Management")
         print("3. Reports")
         print("4. Item Management")
-        print("5. Payment")
-        print("6. Sale")
-        print("7. Back")
+        print("5. Back")
 
         choice=int(input("Option:"))
         if choice == 1:
@@ -277,8 +307,6 @@ def storeModeManager():
         elif choice == 4:
             print ("Item Management\n")
             item()
-        elif choice == 5:
-            print ("Payment\n")
 def onlineMode():
     choice=0
     while choice!=7:

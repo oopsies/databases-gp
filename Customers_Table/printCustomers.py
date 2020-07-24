@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-def printEmployee():
+def printCustomers():
     print("1. All Customers")
     print("2. Specific Customer(s)")
     choice=int(input("Option:"))
