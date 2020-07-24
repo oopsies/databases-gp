@@ -91,7 +91,7 @@ def addCart():
     
     elif choice == 2:
         sql = "INSERT INTO Cart(itemID, cartID, user, itemQuantity, itemPrice, itemCategory) VALUES (%s,%s,%s,%s,%s,%s) "
-        mycursor.execute("SELECT DISTINCT cartID FROM Cart")
+        mycursor.execute("SELECT DISTINCT Cart.cartID FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0 ")
         myresult = mycursor.fetchall()
         for x in myresult:
             print(x)
