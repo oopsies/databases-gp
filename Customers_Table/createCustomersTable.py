@@ -4,8 +4,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="tester",
     password="tester",
-    database="LegoStore", #delete line if error appears
-    autocommit=True
+    database="LegoStore" #Delete line if error appear
 )
 
 mycursor = mydb.cursor() #AWAYS ON

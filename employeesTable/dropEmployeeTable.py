@@ -4,8 +4,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="tester",
     password="tester",
-    database="LegoStore",
-    autocommit=True
+    database="LegoStore"
 )
 
 mycursor = mydb.cursor()
