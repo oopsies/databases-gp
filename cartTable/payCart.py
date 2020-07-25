@@ -1,5 +1,5 @@
-import mysql.connector, decimal
-from datetime import date
+import mysql.connector, decimal, random
+from datetime import date, timedelta
 mydb = mysql.connector.connect(
     host="localhost",
     user="tester",
@@ -10,6 +10,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 name=""
 def payOnlineCart(user):
+    delivery_date=date.today()+timedelta(random.randint(3,5))
     if user == "":
         user="Guest"
     mycursor.execute("SELECT Cart.itemID, Cart.cartID, Cart.itemQuantity, Cart.itemPrice  FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE user=\'"+user+"\' AND Balance.price!=0")
@@ -33,8 +34,8 @@ def payOnlineCart(user):
             sql="UPDATE Balance SET price="+str(0)+" WHERE cartID="+cartID
             mycursor.execute(sql)
             mydb.commit()
-            sql="INSERT INTO Sale (cartID,saleDate,price,delivery_address) VALUES (%s,%s,%s,%s)"
-            entry=(cartID,str(date.today()),str(price),delivery_address)
+            sql="INSERT INTO Sale (cartID,saleDate,price,delivery_address,delivery_date) VALUES (%s,%s,%s,%s,%s)"
+            entry=(cartID,str(date.today()),str(price),delivery_address,str(delivery_date))
             mycursor.execute(sql,entry)
             mydb.commit()
             mycursor.execute("SELECT *FROM Sale WHERE cartID="+cartID)
@@ -66,8 +67,8 @@ def payOnlineCart(user):
                 mycursor.execute(sql)
                 mydb.commit()
 
-                sql="INSERT INTO Sale(cartID,saleDate,price,delivery_address) VALUES (%s,%s,%s,%s)"
-                entry=(cartID,str(date.today()),str(price),delivery_address)
+                sql="INSERT INTO Sale(cartID,saleDate,price,delivery_address,delivery_date) VALUES (%s,%s,%s,%s,%s)"
+                entry=(cartID,str(date.today()),str(price),delivery_address,str(delivery_date))
                 mycursor.execute(sql,entry)
                 mydb.commit()
                 mycursor.execute("SELECT *FROM Sale WHERE cartID="+cartID)
@@ -81,8 +82,8 @@ def payOnlineCart(user):
             mycursor.execute(sql)
             mydb.commit()
 
-            sql="INSERT INTO Sale(cartID,saleDate,price,delivery_address) VALUES (%s,%s,%s,%s)"
-            entry=(cartID,str(date.today()),str(price),delivery_address)
+            sql="INSERT INTO Sale(cartID,saleDate,price,delivery_address,delivery_date) VALUES (%s,%s,%s,%s,%s)"
+            entry=(cartID,str(date.today()),str(price),delivery_address,str(delivery_date))
             mycursor.execute(sql,entry)
             mydb.commit()
             mycursor.execute("SELECT *FROM Sale WHERE cartID="+cartID)
@@ -93,6 +94,7 @@ def payOnlineCart(user):
 
 
 def payCart():
+    delivery_date=date.today()+timedelta(random.randint(3,5))
     mycursor.execute("SELECT DISTINCT Cart.cartID FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0")
     myresult = mycursor.fetchall()
     for x in myresult:
@@ -135,8 +137,8 @@ def payCart():
                 mycursor.execute("SELECT price FROM Sale WHERE cartID="+cartID)
                 myresult = mycursor.fetchall()
                 if len(myresult) == 0:
-                    sql="INSERT INTO Sale (cartID,saleDate,price) VALUES (%s,%s,%s)"
-                    entry=(cartID,str(date.today()),str(saleCost))
+                    sql="INSERT INTO Sale (cartID,saleDate,price,delivery_date) VALUES (%s,%s,%s,%s)"
+                    entry=(cartID,str(date.today()),str(saleCost),str(delivery_date))
                     price=0
                     mycursor.execute(sql,entry)
                     mydb.commit()
@@ -163,8 +165,8 @@ def payCart():
                 mycursor.execute("SELECT price FROM Sale WHERE cartID="+cartID)
                 myresult = mycursor.fetchall()
                 if len(myresult) == 0:
-                    sql="INSERT INTO Sale (cartID,saleDate,price) VALUES (%s,%s,%s)"
-                    entry=(cartID,str(date.today()),str(saleCost))
+                    sql="INSERT INTO Sale (cartID,saleDate,price,delivery_date) VALUES (%s,%s,%s,%s)"
+                    entry=(cartID,str(date.today()),str(saleCost),str(delivery_date))
                     price=0
                     mycursor.execute(sql,entry)
                     mydb.commit()
@@ -182,8 +184,8 @@ def payCart():
                 mycursor.execute("SELECT price FROM Sale WHERE cartID="+cartID)
                 myresult = mycursor.fetchall()
                 if len(myresult) == 0:
-                    sql="INSERT INTO Sale (cartID,saleDate,price) VALUES (%s,%s,%s)"
-                    entry=(cartID,str(date.today()),str(saleCost))
+                    sql="INSERT INTO Sale (cartID,saleDate,price,delivery_date) VALUES (%s,%s,%s,%s)"
+                    entry=(cartID,str(date.today()),str(saleCost),str(delivery_date))
                     price=0
                     mycursor.execute(sql,entry)
                     mydb.commit()
@@ -224,8 +226,8 @@ def payCart():
                 mycursor.execute("SELECT price FROM Sale WHERE cartID="+cartID)
                 myresult = mycursor.fetchall()
                 if len(myresult) == 0:
-                    sql="INSERT INTO Sale (cartID,saleDate,price) VALUES (%s,%s,%s)"
-                    entry=(cartID,str(date.today()),str(saleCost))
+                    sql="INSERT INTO Sale (cartID,saleDate,price,delivery_date) VALUES (%s,%s,%s,%s)"
+                    entry=(cartID,str(date.today()),str(saleCost),str(delivery_date))
                     price=0
                     mycursor.execute(sql,entry)
                     mydb.commit()
@@ -252,8 +254,8 @@ def payCart():
                 mycursor.execute("SELECT price FROM Sale WHERE cartID="+cartID)
                 myresult = mycursor.fetchall()
                 if len(myresult) == 0:
-                    sql="INSERT INTO Sale (cartID,saleDate,price) VALUES (%s,%s,%s)"
-                    entry=(cartID,str(date.today()),str(saleCost))
+                    sql="INSERT INTO Sale (cartID,saleDate,price,delivery_date) VALUES (%s,%s,%s,%s)"
+                    entry=(cartID,str(date.today()),str(saleCost),str(delivery_date))
                     price=0
                     mycursor.execute(sql,entry)
                     mydb.commit()
@@ -271,8 +273,8 @@ def payCart():
                 mycursor.execute("SELECT price FROM Sale WHERE cartID="+cartID)
                 myresult = mycursor.fetchall()
                 if len(myresult) == 0:
-                    sql="INSERT INTO Sale (cartID,saleDate,price) VALUES (%s,%s,%s)"
-                    entry=(cartID,str(date.today()),str(saleCost))
+                    sql="INSERT INTO Sale (cartID,saleDate,price,delivery_date) VALUES (%s,%s,%s,%s)"
+                    entry=(cartID,str(date.today()),str(saleCost),str(delivery_date))
                     price=0
                     mycursor.execute(sql,entry)
                     mydb.commit()
