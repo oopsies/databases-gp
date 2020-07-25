@@ -156,12 +156,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.run" />
       <item itemvalue="Python.createBricksTable" />
-      <item itemvalue="Python.testInserts" />
-      <item itemvalue="Python.testInserts (1)" />
       <item itemvalue="Python.createCartTable" />
+      <item itemvalue="Python.run" />
+      <item itemvalue="Python.testInserts (1)" />
       <item itemvalue="Python.testInserts (2)" />
+      <item itemvalue="Python.testInserts" />
     </list>
     <recent_temporary>
       <list>
