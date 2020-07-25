@@ -8,6 +8,34 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+name=""
+def payOnlineCart(user):
+    if user == "":
+        user="Guest"
+    mycursor.execute("SELECT Cart.itemID, Cart.cartID, Cart.itemQuantity, Cart.itemPrice  FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE user=\'"+user+"\' AND Balance.price!=0")
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
+    if user == "Guest":
+        mycursor.execute("SELECT Balance.price FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE user=\'"+user+"\' AND Balance.price!=0")
+        myresult = mycursor.fetchall()
+        for x in myresult:
+            price=x[0]
+            print(str(x[0]))
+        cardNumber=input("CardNumber:")
+        if len(cardNumber) != 16:
+            print("Invalid Number")
+            payOnlineCart(user)
+        else:
+            card_type=input("Type:")
+            billing_address=input("Input Billing Address:")
+            delivery_address=input("Delivery Address:")
+            sql = "INSERT INTO Payment(billing_address,card_type,card_number,user) VALUES (%s,%s,%s)"
+            entry = (billing_address,card_type,cardNumber,user)
+            mycursor.execute(sql,entry)
+        
+payOnlineCart(name)
+
 
 def payCart():
     mycursor.execute("SELECT DISTINCT Cart.cartID FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0")
@@ -206,4 +234,3 @@ def payCart():
                     myresult = mycursor.fetchall()
                     for x in myresult:
                         print(x)
-payCart()

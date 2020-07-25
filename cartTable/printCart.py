@@ -8,6 +8,17 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+def printFromCart(user):
+    if user == "":
+        user="Guest"
+    mycursor.execute("SELECT Cart.itemID, Cart.cartID, Cart.user, Cart.itemQuantity, Cart.itemPrice, Cart.itemCategory FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Cart.user=\'"+user+"\' AND Balance.price!=0")
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
+
+
+
+
 
 def printCart():
     print("1.Print All Carts")

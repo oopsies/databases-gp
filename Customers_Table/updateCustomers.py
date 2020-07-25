@@ -11,7 +11,7 @@ mycursor = mydb.cursor()
 
 def updateCustomers():
     customers_data = "UPDATE Customers SET "
-    newAttr = input("What value would you like to change(name, email, address, phone)?")
+    newAttr = input("What value would you like to change(name, email, address, phone,password)?")
     newVal = "\'"+input("What value do you want?\n"+newAttr+"=")+"\'"
     targetAttr = input("Which attributes are you searching for(name, email, address, phone)?")
     targetVal = "\'"+input("What value does it have?\n"+targetAttr+"=")+"\'"

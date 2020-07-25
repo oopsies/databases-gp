@@ -8,7 +8,8 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-username="none"
+username=""
+
 def storeLogin():
     attempts=0
     accessStatus=0
@@ -29,7 +30,6 @@ def storeLogin():
             break
     if attempts==4:
         print("Too many incorrect guesses")
-    username=user
     return accessStatus
 
 def onlineLogin():
@@ -41,9 +41,11 @@ def onlineLogin():
     choice=int(input("Option:"))
     if choice == 1:
         for x in range(4):
-            user="\'"+input("username/email:")+"\'"
+            global username
+            user=input("username/email:")
+            username=user
             password="\'"+input("password:")+"\'"
-            sql="SELECT *FROM Customers WHERE email="+user+" AND password="+password
+            sql="SELECT *FROM Customers WHERE email=\'"+user+"\' AND password="+password
             mycursor.execute(sql)
             myresult = mycursor.fetchall()
             y=len(myresult)
@@ -52,16 +54,20 @@ def onlineLogin():
                 attempts+=1
             else:
                 print("Access Granted")
-                for i in myresult:
-                    accessStatus=i[0]
-                break
+                accessStatus=1
+                username = user
+                return accessStatus
         if attempts==4:
             print("Too many incorrect guesses")
-        username=user
         return accessStatus
     elif choice == 2:
         from Customers_Table.addCustomers import addCustomers
         addCustomers()
+    elif choice == 3:
+        print("Access Granted")
+        username = "Guest"
+        accessStatus = 1
+        return accessStatus
 
 def employee():
     choice=0
@@ -321,12 +327,16 @@ def onlineMode():
 
         if choice == 1:
             print("Add to Cart\n")
+            from cartTable.addCart import addToCart
+            addToCart(username)
         elif choice == 2:
             print("Browse Sets\n")
             from setTable.printSet import printSet
             printSet()
         elif choice == 3:
             print("View Cart\n")
+            from cartTable.printCart import printFromCart
+            printFromCart(username)
         elif choice == 4:
             print("View History\n")
         elif choice == 5:
@@ -354,6 +364,8 @@ def menu():
                 storeMode()
         elif choice == 2:
             print("Online mode selected\n")
-            onlineMode()
+            res=onlineLogin()
+            if res == 1:
+                onlineMode()
 menu()
 quit()

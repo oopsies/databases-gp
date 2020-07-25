@@ -20,6 +20,7 @@ def printSet():
         myresult = mycursor.fetchall()
         for x in myresult:
             print(x)
+        print("Check individual Brick for more information")
     elif choice == 2:
         set_id="none"
         while set_id == "none":
