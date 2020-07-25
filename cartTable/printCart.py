@@ -27,7 +27,7 @@ def printCart():
     choice=int(input("Option:"))
 
     if choice == 1:
-        mycursor.execute("SELECT DISTINCT cartID FROM Cart")
+        mycursor.execute("SELECT DISTINCT Cart.cartID FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0")
         myresult = mycursor.fetchall()
         for x in myresult:
             print(x)
