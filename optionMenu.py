@@ -30,6 +30,7 @@ def storeLogin():
             break
     if attempts==4:
         print("Too many incorrect guesses")
+        accessStatus=-1
     return accessStatus
 
 def onlineLogin():
@@ -97,13 +98,14 @@ def employee():
 
 def cart():
     choice=0
-    while choice!=6:
+    while choice!=7:
         print("1. Add to Cart")
         print("2. Update Cart")
         print("3. Delete Cart")
         print("4. View Cart")
         print("5. Make Payment")
-        print("6. Back")
+        print("6. Make Return")
+        print("7. Back")
         choice=int(input("Option:"))
         if choice == 1:
             print("Add to Cart")
@@ -125,6 +127,10 @@ def cart():
             print("Make Payment")
             from cartTable.payCart import payCart
             payCart()
+        elif choice == 6:
+            print("Make Return")
+            from cartTable.deleteCart import returnSale
+            returnSale()
 
 def item():
     choice=0
@@ -315,7 +321,7 @@ def storeModeManager():
             item()
 def onlineMode():
     choice=0
-    while choice!=9:
+    while choice!=10:
         print("1. Add to Cart")
         print("2. Browse Sets")
         print("3. View Cart")
@@ -324,7 +330,8 @@ def onlineMode():
         print("6. Browse Bricks")
         print("7. Delete Payment")
         print("8. Delete from Cart")
-        print("9. Back")
+        print("9. Cancellation/Return")
+        print("10. Back")
         choice = int(input("Option:"))
 
         if choice == 1:
@@ -359,6 +366,11 @@ def onlineMode():
             print("Delete from Cart")
             from cartTable.deleteCart import deleteFromCart
             deleteFromCart(username)
+        elif choice == 9:
+            print("Cancellation/Return")
+            from cartTable.deleteCart import returnOnlineOrder
+            returnOnlineOrder(username)
+            
 
 
 
