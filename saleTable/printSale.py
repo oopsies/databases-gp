@@ -8,6 +8,19 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+name = ""
+def printSaleHistory(user):
+    if user == "":
+        user="Guest"
+    mycursor.execute("SELECT DISTINCT Cart.cartID, Sale.saleDate, Sale.price, Sale.delivery_address FROM Sale RIGHT JOIN Cart ON Cart.cartID=Sale.cartID WHERE Cart.user=\'"+user+"\'")
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
+    cartID=input("Insert CartID to see further details\nID:")
+    mycursor.execute("SELECT *FROM Cart WHERE cartID="+cartID)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        print(x)
 
 def printSale():
     print("1. All Sales")
