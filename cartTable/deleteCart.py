@@ -8,6 +8,28 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
+name=""
+def deleteFromCart(user):
+    print("1.Delete whole Cart")
+    print("2.Delete item from Cart")
+    choice=int(input("Option:"))
+
+    if choice == 1:
+        mycursor.execute("DELETE Cart FROM Cart INNER JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0 AND user=\'"+user+"\'")
+        mydb.commit()
+    elif choice == 2:
+        mycursor.execute("SELECT *FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0 AND user=\'"+user+"\'")
+        myresult=mycursor.fetchall()
+        for x in myresult:
+            print(x)
+        itemID=input("itemID:")
+        mycursor.execute("SELECT *FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0 AND user=\'"+user+"\' AND itemID="+itemID)
+        myresult=mycursor.fetchall()
+        for x in myresult:
+            print(x)
+        mycursor.execute("DELETE Cart FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE Balance.price!=0 AND user=\'"+user+"\' AND itemID="+itemID)
+        mydb.commit()
+        print(mycursor.rowcount,"record(s) deleted\n")
 
 def deleteCart():
     print("1. Delete whole Cart")

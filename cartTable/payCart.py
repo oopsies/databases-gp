@@ -14,7 +14,9 @@ def payOnlineCart(user):
         user="Guest"
     mycursor.execute("SELECT Cart.itemID, Cart.cartID, Cart.itemQuantity, Cart.itemPrice  FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE user=\'"+user+"\' AND Balance.price!=0")
     myresult = mycursor.fetchall()
+    cartID=""
     for x in myresult:
+        cartID=x[1]
         print(x)
     if user == "Guest":
         mycursor.execute("SELECT Balance.price FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE user=\'"+user+"\' AND Balance.price!=0")
@@ -27,14 +29,67 @@ def payOnlineCart(user):
             print("Invalid Number")
             payOnlineCart(user)
         else:
-            card_type=input("Type:")
-            billing_address=input("Input Billing Address:")
             delivery_address=input("Delivery Address:")
-            sql = "INSERT INTO Payment(billing_address,card_type,card_number,user) VALUES (%s,%s,%s)"
-            entry = (billing_address,card_type,cardNumber,user)
+            sql="UPDATE Balance SET price="+str(0)+" WHERE cartID="+cartID
+            mycursor.execute(sql)
+            mydb.commit()
+            sql="INSERT INTO Sale (cartID,saleDate,price,delivery_address) VALUES (%s,%s,%s,%s)"
+            entry=(cartID,str(date.today()),str(price),delivery_address)
             mycursor.execute(sql,entry)
-        
-payOnlineCart(name)
+            mydb.commit()
+            mycursor.execute("SELECT *FROM Sale WHERE cartID="+cartID)
+            myresult = mycursor.fetchall()
+            for x in myresult:
+                print(x)
+    else:
+        mycursor.execute("SELECT Balance.price FROM Cart RIGHT JOIN Balance ON Cart.cartID=Balance.cartID WHERE user=\'"+user+"\' AND Balance.price!=0")
+        myresult = mycursor.fetchall()
+        for x in myresult:
+            price=x[0]
+            print(str(x[0]))
+        mycursor.execute("SELECT billing_address FROM Payment WHERE user=\'"+user+"\'")
+        myresult = mycursor.fetchall()
+        if len(myresult) == 0:
+            cardNumber=input("CardNumber:")
+            if len(cardNumber) != 16:
+                print("Invalid Number")
+                payOnlineCart(user)
+            else:
+                cardType=input("CardType:")
+                delivery_address=input("Delivery Address:")
+                sql = "INSERT INTO Payment(billing_address,card_type,card_number,user) VALUES (%s,%s,%s,%s)"
+                entry =(delivery_address,cardType,cardNumber,user)
+                mycursor.execute(sql,entry)
+                mydb.commit()
+
+                sql="UPDATE Balance SET price="+str(0)+" WHERE cartID="+cartID
+                mycursor.execute(sql)
+                mydb.commit()
+
+                sql="INSERT INTO Sale(cartID,saleDate,price,delivery_address) VALUES (%s,%s,%s,%s)"
+                entry=(cartID,str(date.today()),str(price),delivery_address)
+                mycursor.execute(sql,entry)
+                mydb.commit()
+                mycursor.execute("SELECT *FROM Sale WHERE cartID="+cartID)
+                myresult = mycursor.fetchall()
+                for x in myresult:
+                    print(x)
+        else:
+            for x in myresult:
+                delivery_address=x[0]
+            sql="UPDATE Balance SET price="+str(0)+" WHERE cartID="+cartID
+            mycursor.execute(sql)
+            mydb.commit()
+
+            sql="INSERT INTO Sale(cartID,saleDate,price,delivery_address) VALUES (%s,%s,%s,%s)"
+            entry=(cartID,str(date.today()),str(price),delivery_address)
+            mycursor.execute(sql,entry)
+            mydb.commit()
+            mycursor.execute("SELECT *FROM Sale WHERE cartID="+cartID)
+            myresult = mycursor.fetchall()
+            for x in myresult:
+                print(x)
+
 
 
 def payCart():

@@ -315,14 +315,16 @@ def storeModeManager():
             item()
 def onlineMode():
     choice=0
-    while choice!=7:
+    while choice!=9:
         print("1. Add to Cart")
         print("2. Browse Sets")
         print("3. View Cart")
         print("4. View History")
         print("5. Pay for Cart")
         print("6. Browse Bricks")
-        print("7. Back")
+        print("7. Delete Payment")
+        print("8. Delete from Cart")
+        print("9. Back")
         choice = int(input("Option:"))
 
         if choice == 1:
@@ -339,12 +341,24 @@ def onlineMode():
             printFromCart(username)
         elif choice == 4:
             print("View History\n")
+            from saleTable.printSale import printSaleHistory
+            printSaleHistory(username)
         elif choice == 5:
             print("Pay for cart\n")
+            from cartTable.payCart import payOnlineCart
+            payOnlineCart(username)
         elif choice == 6:
             print("Browse Bricks\n")
             from brickTable.printBrick import printBrick
             printBrick()
+        elif choice == 7:
+            print("Delete Payment\n")
+            from paymentTable.deletePayment import deletePayment
+            deletePayment(username)
+        elif choice == 8:
+            print("Delete from Cart")
+            from cartTable.deleteCart import deleteFromCart
+            deleteFromCart(username)
 
 
 
