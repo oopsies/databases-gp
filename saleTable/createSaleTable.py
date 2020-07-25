@@ -13,7 +13,7 @@ def createSaleTable():
     sql = "CREATE TABLE Sale (cartID VARCHAR(5) NOT NULL,"\
         "saleDate date NOT NULL,"\
         "price DECIMAL (9,2) UNSIGNED,"\
-        "delivery_address VARCHAR(255) DEFAULT 'NONE',"\ 
+        "delivery_address VARCHAR(255) DEFAULT 'NONE',"\
         "PRIMARY KEY(cartID,saleDate))"
     mycursor.execute(sql)
     mycursor.execute("DESCRIBE Sale")
