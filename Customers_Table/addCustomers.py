@@ -14,8 +14,9 @@ def addCustomers():
     email = input('email: ')
     address = input('address: ')
     phone = input('phone: ')
-    customers_data="INSERT INTO Customers (name, email, address, phone) VALUES (%s,%s,%s,%s)"
-    val=(name, email, address, str(phone))
+    password = input('password: ')
+    customers_data="INSERT INTO Customers (name, email, address, phone, password ) VALUES (%s,%s,%s,%s,%s)"
+    val=(name, email, address, phone, password)
     mycursor.execute(customers_data,val)
     mydb.commit()
     

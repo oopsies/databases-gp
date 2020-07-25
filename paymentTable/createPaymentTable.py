@@ -11,11 +11,10 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def createPaymentTable():
-    sql = "CREATE TABLE Payment (payment_type VARCHAR(4) NOT NULL, " \
-                                "billing_address VARCHAR(255) PRIMARY KEY, " \
+    sql = "CREATE TABLE Payment (billing_address VARCHAR(255) PRIMARY KEY, " \
                                 "card_type VARCHAR(32), " \
                                 "card_number VARCHAR(16)," \
-                                "amount DECIMAL(6, 2) NOT NULL)"
+                                "user VARCHAR(255))"
     mycursor.execute(sql)
 
 
