@@ -4,7 +4,8 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="tester",
     password="tester",
-    database="LegoStore"
+    database="LegoStore",
+    autocommit=True
 )
 
 mycursor = mydb.cursor()
@@ -12,6 +13,7 @@ mycursor = mydb.cursor()
 def printBrick():
     print("1. All Bricks")
     print("2. Specific Brick(s)")
+    print("3. Back")
     choice=int(input("Option:"))
 
     if choice == 1:
