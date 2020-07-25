@@ -14,6 +14,7 @@ def createSaleTable():
         "saleDate date NOT NULL,"\
         "price DECIMAL (9,2) UNSIGNED,"\
         "delivery_address VARCHAR(255) DEFAULT 'NONE',"\
+        "delivery_date date,"\
         "PRIMARY KEY(cartID,saleDate))"
     mycursor.execute(sql)
     mycursor.execute("DESCRIBE Sale")

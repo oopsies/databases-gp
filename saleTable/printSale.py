@@ -12,7 +12,7 @@ name = ""
 def printSaleHistory(user):
     if user == "":
         user="Guest"
-    mycursor.execute("SELECT DISTINCT Cart.cartID, Sale.saleDate, Sale.price, Sale.delivery_address FROM Sale RIGHT JOIN Cart ON Cart.cartID=Sale.cartID WHERE Cart.user=\'"+user+"\'")
+    mycursor.execute("SELECT DISTINCT Cart.cartID, Sale.saleDate, Sale.price, Sale.delivery_address, Sale.delivery_date FROM Sale RIGHT JOIN Cart ON Cart.cartID=Sale.cartID WHERE Cart.user=\'"+user+"\'")
     myresult = mycursor.fetchall()
     for x in myresult:
         print(x)
