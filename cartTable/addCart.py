@@ -4,7 +4,8 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="tester",
     password="tester",
-    database="LegoStore"
+    database="LegoStore",
+    autocommit=True
 )
 
 username=""
@@ -98,7 +99,7 @@ def addToCart(user):
             cartID=x[0]
             print(x[0])
         sql = "INSERT INTO Cart(itemID, cartID, user, itemQuantity, itemPrice, itemCategory) VALUES (%s,%s,%s,%s,%s,%s)"
-        item = input("Set or Brick:")
+        item = input("Type: Set or Brick?: ")
         if item in ['set','Set']:
             print("Set")
             set_id=input("SetID:")

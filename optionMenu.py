@@ -4,7 +4,8 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="tester",
     password="tester",
-    database="LegoStore"
+    database="LegoStore",
+    autocommit=True
 )
 
 mycursor = mydb.cursor()
@@ -14,8 +15,8 @@ def storeLogin():
     attempts=0
     accessStatus=0
     for x in range(4):
-        user="\'"+input("username:")+"\'"
-        password="\'"+input("password:")+"\'"
+        user="\'"+input("user ID:")+"\'"
+        password="\'"+input("pin:")+"\'"
         sql="SELECT manage FROM Employees WHERE id="+user+" AND pin="+password
         mycursor.execute(sql)
         myresult = mycursor.fetchall()

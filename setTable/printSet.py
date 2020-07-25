@@ -13,6 +13,7 @@ def printSet():
     print("1. Print All Sets")
     print("2. Print Specific Set and its Bricks")
     print("3. Print Sets based on attributes")
+    print("4. Back")
     choice=int(input("Option:"))
 
     if choice == 1:
@@ -29,7 +30,7 @@ def printSet():
             myresult=mycursor.fetchall()
             if len(myresult) == 0:
                 print("Invalid ID")
-                set_id="none"
+                #set_id="none"
             else:
                 for x in myresult:
                       print(x)
@@ -37,7 +38,6 @@ def printSet():
                 myresult=mycursor.fetchall()
                 for x in myresult:
                     print(set_id+" has a price of $"+str(x[0]))
-            
     elif choice == 3:
         sql="SELECT * FROM Set_t WHERE "
         attr = input("What is the attribute you are searching for(ex. set_id, name, brick_id, bricks_needed )?")
@@ -49,6 +49,8 @@ def printSet():
         myresult = mycursor.fetchall()
         for x in myresult:
             print(x)
+    elif choice == 4:
+        return
     else:
         print("Invalid Option")
         printSet()
